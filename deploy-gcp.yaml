@@ -1,0 +1,54 @@
+# aio-orderable.ai — Google Cloud Run Deployment
+#
+# Prerequisites:
+#   gcloud auth login
+#   gcloud config set project <your-project-id>
+#
+# Build and deploy:
+#   gcloud run deploy aio-orderable \
+#     --source . \
+#     --region europe-west1 \
+#     --allow-unauthenticated \
+#     --set-env-vars MCP_ENDPOINT=<your-endpoint>,MCP_TOKEN=<your-token>
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: aio-orderable
+  labels:
+    cloud.googleapis.com/location: europe-west1
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/cpu-throttling: "false"
+    spec:
+      containerConcurrency: 100
+      timeoutSeconds: 30
+      containers:
+        - image: gcr.io/<project-id>/aio-orderable:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          env:
+            - name: MCP_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: mcp-endpoint
+                  key: latest
+            - name: MCP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: mcp-token
+                  key: latest
+
+# Custom domain mapping:
+#   gcloud run domain-mappings create \
+#     --service aio-orderable \
+#     --domain aio-orderable.ai \
+#     --region europe-west1

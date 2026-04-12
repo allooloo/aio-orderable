@@ -1,0 +1,48 @@
+{
+  "protocol": "ACM-68000",
+  "version": "1.0.0",
+  "router": "aio-orderable.ai",
+  "updated": "2026-04-10",
+  "clusters": {
+    "HYGIENE": {
+      "rail": "aio-tfx-rail.ai",
+      "status": "LIVE",
+      "keywords": ["diaper", "diapers", "nappy", "nappies", "treefree", "core", "absorbent", "incontinence"],
+      "items": [
+        {
+          "gtin": "00990832300006",
+          "label": "TreeFree Core Tape",
+          "sku": "ZTPL-10060-OP",
+          "signal": "acm-200.ai",
+          "dpu": "https://dpuone.ai/dpu/00990832300006.json",
+          "jurisdictions": ["US", "CA", "MX", "UK", "FR", "DE", "IT", "ES", "CH", "PL", "NL", "SG", "SK", "IN", "JP", "KR", "AU", "BR"]
+        },
+        {
+          "gtin": "00990832300013",
+          "label": "TreeFree Core Pant",
+          "sku": "ZTPL-10060-PT",
+          "signal": "acm-200.ai",
+          "dpu": "https://dpuone.ai/dpu/00990832300013.json",
+          "jurisdictions": ["US", "CA", "MX", "UK", "FR", "DE", "IT", "ES", "CH", "PL", "NL", "SG", "SK", "IN", "JP", "KR", "AU", "BR"]
+        }
+      ]
+    },
+    "BPC": {
+      "rail": "aio-rail.ai",
+      "status": "LIVE",
+      "keywords": ["cosmetic", "skincare", "beauty", "lotion", "cream", "serum", "hygiene-beaute"],
+      "items": []
+    }
+  },
+  "signal_stack": {
+    "acm-200.ai": "ALLOW",
+    "acm-300.ai": "CONDITIONAL",
+    "acm-403.ai": "RESTRICT",
+    "acm-404.ai": "NOT_FOUND",
+    "acm-451.ai": "ESCALATE",
+    "acm-500.ai": "SYSTEM_ERROR",
+    "acm-000.ai": "NOT_APPLICABLE"
+  },
+  "buyer_portal": "https://aio-buyer.com",
+  "operator": "Allooloo Technologies Corp."
+}

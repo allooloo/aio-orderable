@@ -1,0 +1,67 @@
+# aio-orderable.ai — Azure Container Apps Deployment
+# Deploy to Allooloo Corporate Tenant
+# 
+# Prerequisites:
+#   az login
+#   az extension add --name containerapp
+#
+# Deploy:
+#   az containerapp up --name aio-orderable \
+#     --resource-group allooloo-rg \
+#     --location francecentral \
+#     --source .
+
+name: aio-orderable
+location: francecentral
+
+properties:
+  managedEnvironmentId: /subscriptions/<subscription-id>/resourceGroups/allooloo-rg/providers/Microsoft.App/managedEnvironments/allooloo-env
+  
+  configuration:
+    ingress:
+      external: true
+      targetPort: 8000
+      transport: http
+      corsPolicy:
+        allowedOrigins:
+          - "*"
+        allowedMethods:
+          - GET
+          - POST
+          - OPTIONS
+        allowedHeaders:
+          - "*"
+    
+    secrets:
+      - name: mcp-endpoint
+        value: "<your-mcp-endpoint>"
+      - name: mcp-token
+        value: "<your-mcp-token>"
+  
+  template:
+    containers:
+      - name: ghost-router
+        image: ghcr.io/allooloo/aio-orderable:latest
+        resources:
+          cpu: 0.25
+          memory: 0.5Gi
+        env:
+          - name: MCP_ENDPOINT
+            secretRef: mcp-endpoint
+          - name: MCP_TOKEN
+            secretRef: mcp-token
+    
+    scale:
+      minReplicas: 1
+      maxReplicas: 10
+      rules:
+        - name: http-scaling
+          http:
+            metadata:
+              concurrentRequests: "100"
+
+# Custom domain (after deployment):
+#   az containerapp hostname add \
+#     --name aio-orderable \
+#     --resource-group allooloo-rg \
+#     --hostname aio-orderable.ai
