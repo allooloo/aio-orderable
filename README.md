@@ -1,4 +1,5 @@
-# aio-orderable.ai — Ghost Router
+# Ghost-Router.ai —  Inbound Signal Router for the Agentic Era
+Human-in-the-Loop Signal Routing for Agentic Commerce
 
 ![ACM-68000](https://img.shields.io/badge/Protocol-ACM--68000-blue)
 ![MCP Registry](https://img.shields.io/badge/MCP-io.github.allooloo-green)
