@@ -14,17 +14,6 @@ Inbound:  World → aio-orderable.ai → You
 
 Built by [Allooloo Technologies Corp.](https://allooloo.ai) + [Claude](https://anthropic.com) (Anthropic).
 
-# aio-orderable.ai — Ghost Router
-
-The inbound signal router for ACM-68000.
-
-```
-Outbound: resolver.aio-resolver.com → World
-Inbound:  World → aio-orderable.ai → You
-```
-
-Built by **Allooloo Technologies Corp.** + **Claude** (Anthropic).
-
 ---
 
 ## What It Does
