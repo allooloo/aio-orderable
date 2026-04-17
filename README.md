@@ -1,4 +1,4 @@
-# Ghost-Router.ai —  Inbound Signal Router for the Agentic Era
+# Ghost-Router.ai —  Inbound Agentic B2B Signal Router for Agentic Era
 Human-in-the-Loop Signal Routing for Agentic Commerce
 
 ![ACM-68000](https://img.shields.io/badge/Protocol-ACM--68000-blue)
